@@ -12,8 +12,6 @@ public_folder: "/images/uploads"
 # Site URL (for preview links)
 site_url: https://lainmobiliaria.mx
 
-locale: en
-
 collections:
   # ─── PROPERTIES ───────────────────────────────────────────────
   - name: "properties"

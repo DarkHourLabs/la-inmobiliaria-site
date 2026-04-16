@@ -6,21 +6,28 @@
   <meta name="robots" content="noindex" />
   <title>La Inmobiliaria | CMS</title>
   <style>
-    /* Suppress Decap CMS green gradient on object widgets */
-    div[class] > div[style*="background"],
+    /* Remove gradient from Location/Map field and all object widget headers */
     div[style*="linear-gradient"] {
       background: #f5f5f5 !important;
       background-image: none !important;
     }
+    div[class] > div[style*="background"] {
+      background: #f5f5f5 !important;
+      background-image: none !important;
+    }
+    /* Never override the map iframe itself */
+    iframe {
+      background: transparent !important;
+    }
   </style>
   <script>
-    // Inject style to override Decap CMS object widget gradient after mount
     document.addEventListener('DOMContentLoaded', function () {
       var style = document.createElement('style');
       style.textContent = [
-        '/* Decap object widget top bar — override green gradient */',
-        '[class*="sc-"][style*="background"] { background: #f0f0f0 !important; background-image: none !important; }',
-        'div[style*="linear-gradient"] { background: #f0f0f0 !important; background-image: none !important; }',
+        '/* Override Sveltia/Decap CMS object widget gradients at runtime */',
+        '[style*="linear-gradient"] { background: #f5f5f5 !important; background-image: none !important; }',
+        '[style*="background"][class] { background: #f5f5f5 !important; background-image: none !important; }',
+        'iframe { background: transparent !important; }',
       ].join('\n');
       document.head.appendChild(style);
     });

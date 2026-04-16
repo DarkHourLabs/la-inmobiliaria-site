@@ -2,48 +2,126 @@ backend:
   name: github
   repo: DarkHourLabs/la-inmobiliaria-site
   branch: main
+  base_url: https://sveltia-cms-auth.pages.dev
 
-media_folder: "images"
-public_folder: "/images"
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
 
 locale: "es"
 
 collections:
-  - name: "pages"
-    label: "Páginas"
-    files:
-      - name: "index"
-        label: "Inicio"
-        file: "index.html"
+  - name: "properties"
+    label: "Propiedades"
+    label_singular: "Propiedad"
+    folder: "src/content/properties"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Zona", name: "zone", widget: "select", options: ["Centro", "Marina", "El Mogote", "Pichilingue", "El Centenario"] }
+      - { label: "Precio (MXN)", name: "price", widget: "number", value_type: "int" }
+      - { label: "Moneda", name: "currency", widget: "hidden", default: "MXN" }
+      - label: "Meta SEO"
+        name: "meta"
+        widget: "object"
         fields:
-          - { label: "Contenido HTML", name: "body", widget: "code", default_language: "html", output_code_only: true }
+          - { label: "Título SEO", name: "title", widget: "string", required: false }
+          - { label: "Descripción SEO", name: "description", widget: "text", required: false }
+          - { label: "Palabras clave", name: "keywords", widget: "list", required: false }
+      - { label: "Recámaras", name: "bedrooms", widget: "number", value_type: "int" }
+      - { label: "Baños", name: "bathrooms", widget: "number", value_type: "int" }
+      - { label: "Tamaño (m²)", name: "size", widget: "number", value_type: "int" }
+      - { label: "Unidad de tamaño", name: "sizeUnit", widget: "hidden", default: "m²" }
+      - { label: "Descripción", name: "description", widget: "text" }
+      - { label: "Destacada", name: "featured", widget: "boolean", default: false }
+      - label: "Estado"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "Disponible", value: "available" }
+          - { label: "Pendiente", value: "pending" }
+          - { label: "Vendida", value: "sold" }
+        default: "available"
+      - { label: "Imagen principal", name: "image", widget: "image", required: false }
+      - { label: "Galería de imágenes", name: "images", widget: "list", field: { label: "URL", name: "url", widget: "image" }, required: false }
+      - label: "Ubicación"
+        name: "location"
+        widget: "object"
+        fields:
+          - { label: "Dirección", name: "address", widget: "string" }
+          - label: "Coordenadas"
+            name: "coordinates"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Latitud", name: "lat", widget: "number", value_type: "float", required: false }
+              - { label: "Longitud", name: "lng", widget: "number", value_type: "float", required: false }
+      - { label: "Amenidades", name: "amenities", widget: "list", required: false }
+      - { label: "ID del Agente", name: "agent-id", widget: "string", required: false }
+      - { label: "Tipo de precio", name: "priceType", widget: "select", options: ["venta", "renta"], default: "venta", required: false }
+      - { label: "Fecha de creación", name: "createdAt", widget: "datetime", required: false }
+      - { label: "Última actualización", name: "updatedAt", widget: "datetime", required: false }
+      - { label: "Contenido adicional", name: "body", widget: "markdown", required: false }
 
-      - name: "servicios"
-        label: "Servicios"
-        file: "servicios.html"
-        fields:
-          - { label: "Contenido HTML", name: "body", widget: "code", default_language: "html", output_code_only: true }
+  - name: "agents"
+    label: "Agentes"
+    label_singular: "Agente"
+    folder: "src/content/agents"
+    create: true
+    slug: "{{agent-id}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Título (nombre completo)", name: "title", widget: "string" }
+      - { label: "ID del agente", name: "agent-id", widget: "string" }
+      - { label: "Nombre", name: "name", widget: "string" }
+      - { label: "Cargo", name: "jobTitle", widget: "string" }
+      - { label: "Biografía", name: "bio", widget: "text" }
+      - { label: "Email", name: "email", widget: "string" }
+      - { label: "Teléfono", name: "phone", widget: "string" }
+      - { label: "Foto", name: "image", widget: "image", required: false }
+      - { label: "Idiomas", name: "languages", widget: "list", default: ["Español"] }
+      - { label: "Especialidades", name: "specialties", widget: "list", required: false }
+      - { label: "Experiencia", name: "experience", widget: "string", required: false }
+      - { label: "Contenido adicional", name: "body", widget: "markdown", required: false }
 
-      - name: "nosotros"
-        label: "Nosotros"
-        file: "nosotros.html"
+  - name: "zones"
+    label: "Zonas"
+    label_singular: "Zona"
+    folder: "src/content/zones"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción corta", name: "description", widget: "text" }
+      - { label: "Descripción larga", name: "overview", widget: "text", required: false }
+      - { label: "Imagen principal", name: "image", widget: "image", required: false }
+      - { label: "Miniatura", name: "thumbnail", widget: "image", required: false }
+      - label: "Meta SEO"
+        name: "meta"
+        widget: "object"
+        required: false
         fields:
-          - { label: "Contenido HTML", name: "body", widget: "code", default_language: "html", output_code_only: true }
-
-      - name: "personal"
-        label: "Personal / Equipo"
-        file: "personal.html"
+          - { label: "Título SEO", name: "title", widget: "string", required: false }
+          - { label: "Descripción SEO", name: "description", widget: "text", required: false }
+          - { label: "Palabras clave", name: "keywords", widget: "list", required: false }
+      - { label: "URL embed mapa", name: "mapEmbedUrl", widget: "string", required: false }
+      - label: "Coordenadas del centro"
+        name: "coordinates"
+        widget: "object"
+        required: false
         fields:
-          - { label: "Contenido HTML", name: "body", widget: "code", default_language: "html", output_code_only: true }
-
-      - name: "contacto"
-        label: "Contacto"
-        file: "contacto.html"
-        fields:
-          - { label: "Contenido HTML", name: "body", widget: "code", default_language: "html", output_code_only: true }
-
-      - name: "preguntas"
-        label: "Preguntas Frecuentes"
-        file: "preguntas.html"
-        fields:
-          - { label: "Contenido HTML", name: "body", widget: "code", default_language: "html", output_code_only: true }
+          - label: "Centro"
+            name: "center"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Latitud", name: "lat", widget: "number", value_type: "float", required: false }
+              - { label: "Longitud", name: "lng", widget: "number", value_type: "float", required: false }
+      - { label: "Precio promedio (MXN)", name: "averagePrice", widget: "number", value_type: "int", required: false }
+      - { label: "Características", name: "features", widget: "list", required: false }
+      - { label: "Contenido adicional", name: "body", widget: "markdown", required: false }

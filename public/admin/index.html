@@ -145,19 +145,32 @@
       return;
     }
 
-    const bar = document.createElement('div');
-    bar.id = 'cms-toggles';
-    header.appendChild(bar);
-    renderToggles();
-    injected = true;
+    // Guard: header must still be in the document before we touch it
+    if (!document.body.contains(header)) return;
+
+    try {
+      const bar = document.createElement('div');
+      bar.id = 'cms-toggles';
+      header.appendChild(bar);
+      renderToggles();
+      injected = true;
+    } catch (e) {
+      // Header was removed mid-flight; will retry on next mutation
+      console.warn('[CMS toggles] inject failed, will retry:', e.message);
+    }
   }
 
-  // Observe DOM for Decap rendering
+  // Observe DOM for Decap rendering (debounced to avoid mid-mutation errors)
+  let injectTimer = null;
   const observer = new MutationObserver(function () {
-    tryInject();
-    // Re-check if user logs out and logs back in
+    // Re-check logout
     if (injected && !document.getElementById('cms-toggles')) {
       injected = false;
+    }
+    // Debounce injection attempts — Decap moves elements around rapidly
+    if (!injected) {
+      clearTimeout(injectTimer);
+      injectTimer = setTimeout(tryInject, 200);
     }
   });
 

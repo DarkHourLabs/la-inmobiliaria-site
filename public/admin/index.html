@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>La Inmobiliaria | CMS</title>
+  <style>
+    /* Suppress Decap CMS green gradient on object widgets */
+    div[class] > div[style*="background"],
+    div[style*="linear-gradient"] {
+      background: #f5f5f5 !important;
+      background-image: none !important;
+    }
+  </style>
+  <script>
+    // Inject style to override Decap CMS object widget gradient after mount
+    document.addEventListener('DOMContentLoaded', function () {
+      var style = document.createElement('style');
+      style.textContent = [
+        '/* Decap object widget top bar — override green gradient */',
+        '[class*="sc-"][style*="background"] { background: #f0f0f0 !important; background-image: none !important; }',
+        'div[style*="linear-gradient"] { background: #f0f0f0 !important; background-image: none !important; }',
+      ].join('\n');
+      document.head.appendChild(style);
+    });
+  </script>
 </head>
 <body>
 

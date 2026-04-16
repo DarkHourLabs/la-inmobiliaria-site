@@ -153,10 +153,10 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', fun
 
 // ── CMS init ──────────────────────────────────────────────────────
 // Let Decap load config.yml directly (no programmatic config injection).
-// Passing config programmatically caused Decap v3 to merge it with the
-// file load, producing duplicate collections. Manual init just controls
-// *when* init fires — config loading is left to Decap's own fetch.
-window.CMS.init({ config: { locale: getLocale() } });
+// Locale is set via localStorage before init — Decap reads cms-locale
+// automatically in v3, so no config argument is needed.
+localStorage.setItem('cms-locale', getLocale());
+window.CMS.init();
 </script>
 
 </body>

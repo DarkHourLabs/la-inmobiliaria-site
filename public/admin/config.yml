@@ -5,7 +5,13 @@ backend:
   base_url: https://lainmobiliaria.mx
   auth_endpoint: api/auth
 
-# Media files stored in public/images
+# Media stored in Cloudinary
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: dqom6oy7t
+    api_key: 833243661766811
+
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 

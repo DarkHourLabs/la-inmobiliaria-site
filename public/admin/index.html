@@ -159,6 +159,8 @@ fetch('config.yml')
   .then(function(yamlText) {
     var config = jsyaml.load(yamlText);
     config.locale = getLocale();
+    // Prevent Decap from also fetching config.yml internally (avoids duplicate collections)
+    config.load_config_file = false;
     window.CMS.init({ config: config });
   })
   .catch(function(err) {

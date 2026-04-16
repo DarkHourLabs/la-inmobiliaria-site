@@ -156,7 +156,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', fun
 // Passing config programmatically caused Decap v3 to merge it with the
 // file load, producing duplicate collections. Manual init just controls
 // *when* init fires — config loading is left to Decap's own fetch.
-window.CMS.init();
+window.CMS.init({ config: { locale: getLocale() } });
 </script>
 
 </body>

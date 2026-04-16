@@ -6,14 +6,19 @@ backend:
   auth_endpoint: api/auth
 
 # Media — Cloudinary (images stored in Cloudinary, not the Git repo)
-media_library:
-  name: cloudinary
-  config:
-    cloud_name: dqom6oy7t
-    api_key: 833243661766811
-    # API secret is server-side only; do not put it here
+# Using Sveltia CMS preferred format (media_libraries)
+media_libraries:
+  cloudinary:
+    config:
+      cloud_name: dqom6oy7t
+      api_key: 833243661766811
+      # API secret is server-side only; do not put it here
+    # Store full Cloudinary URLs (not just filenames)
+    output_filename_only: false
+    # Skip transformations to save clean, reliable URLs
+    use_transformations: false
 
-# Fallback local folders (used only if Cloudinary widget is unavailable)
+# Local folder (fallback only — prefer Cloudinary for all media)
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 

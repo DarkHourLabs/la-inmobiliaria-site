@@ -2,6 +2,7 @@
 title: Casa Residencial en El Centenario
 zone: El Centenario
 price: 2200000
+originalPrice: null
 currency: MXN
 bedrooms: 3
 bathrooms: 2
@@ -16,7 +17,7 @@ images:
   - https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=entropy&auto=format
   - https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=600&fit=crop&crop=entropy&auto=format
   - https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop&crop=entropy&auto=format
-  - /images/uploads/post-01-launch.png
+  - /images/uploads/post-03-cybersecurity.png
 location:
   address: Fraccionamiento Villa Centenario, El Centenario, La Paz, BCS
   coordinates:

@@ -2,7 +2,6 @@
 title: Casa Residencial en El Centenario
 zone: El Centenario
 price: 2200000
-originalPrice: null
 currency: MXN
 bedrooms: 3
 bathrooms: 2

@@ -5,13 +5,15 @@ backend:
   base_url: https://lainmobiliaria.mx
   auth_endpoint: api/auth
 
-# Media stored in Cloudinary
+# Media — Cloudinary (images stored in Cloudinary, not the Git repo)
 media_library:
   name: cloudinary
   config:
-    cloud_name: dqom6oy7t
-    api_key: 833243661766811
+    cloud_name: CLOUDINARY_CLOUD_NAME   # <-- replace with actual cloud name
+    api_key: CLOUDINARY_API_KEY         # <-- replace with actual API key
+    # API secret is server-side only; do not put it here
 
+# Fallback local folders (used only if Cloudinary widget is unavailable)
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 

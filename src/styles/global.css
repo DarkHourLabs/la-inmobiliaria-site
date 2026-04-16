@@ -1,17 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  /* Olive monochromatic color palette */
-  --color-primary-50: #f6f7f2;
-  --color-primary-100: #e8ede1;
-  --color-primary-200: #d3dcc5;
-  --color-primary-300: #b8c6a3;
-  --color-primary-400: #96ab7c;
-  --color-primary-500: #7a8c5e;
-  --color-primary-600: #64734d;
-  --color-primary-700: #4f5b3c;
-  --color-primary-800: #3f4830;
-  --color-primary-900: #353d28;
+  /* Navy color palette — La Inmobiliaria */
+  --color-primary-50: #eef3f8;
+  --color-primary-100: #d9e6f0;
+  --color-primary-200: #b3cde1;
+  --color-primary-300: #8db4d2;
+  --color-primary-400: #679bc3;
+  --color-primary-500: #4182b4;
+  --color-primary-600: #2d6090;
+  --color-primary-700: #1e3a5f;
+  --color-primary-800: #162c47;
+  --color-primary-900: #0e1d2f;
+
+  /* Gold accent palette */
+  --color-accent-300: #e8c4a8;
+  --color-accent-400: #d8ab88;
+  --color-accent-500: #c8956c;
+  --color-accent-600: #b07857;
+  --color-accent-700: #985f42;
 
   /* Soft neutrals */
   --color-neutral-50: #fafafa;
@@ -109,6 +116,14 @@
   .text-neutral-light {
     color: var(--color-neutral-500);
   }
+
+  /* Gold accent utilities */
+  .text-accent { color: var(--color-accent-500); }
+  .bg-accent { background-color: var(--color-accent-500); }
+  .border-accent { border-color: var(--color-accent-500); }
+  .text-accent-light { color: var(--color-accent-400); }
+  .hover\:text-accent:hover { color: var(--color-accent-500); }
+  .hover\:bg-accent:hover { background-color: var(--color-accent-600); }
 
   .bg-neutral-light {
     background-color: var(--color-neutral-500);

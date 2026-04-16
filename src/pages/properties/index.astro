@@ -34,8 +34,8 @@ const paginatedProperties = allProperties.slice(startIndex, endIndex);
 ---
 
 <Layout
-  title="Properties - Houses Boutique"
-  description="Browse our exclusive collection of premium properties in prime locations. Find your dream home today."
+  title="Propiedades — La Inmobiliaria"
+  description="Explora nuestra colección exclusiva de propiedades en La Paz, BCS. Encuentra tu hogar ideal hoy."
 >
   <!-- Hero Section -->
   <section class="relative h-96 overflow-hidden">
@@ -43,10 +43,10 @@ const paginatedProperties = allProperties.slice(startIndex, endIndex);
     <div class="relative container mx-auto px-4 h-full flex items-center">
       <div class="max-w-2xl">
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-          Exclusive Properties
+          Propiedades Exclusivas
         </h1>
         <p class="text-xl text-white/90">
-          Discover our curated selection of luxury homes in the most sought-after neighborhoods
+          Descubre nuestra selección curada de propiedades en La Paz, BCS
         </p>
       </div>
     </div>
@@ -58,18 +58,18 @@ const paginatedProperties = allProperties.slice(startIndex, endIndex);
       <!-- Filter Controls -->
       <div class="bg-primary-soft p-6 rounded-lg mb-6 text-primary-lightest">
         <div class="flex items-center justify-between mb-6">
-          <h2 class="text-xl font-semibold">Filter Properties</h2>
+          <h2 class="text-xl font-semibold">Filtrar Propiedades</h2>
           <button id="clear-filters" class="bg-primary-faint text-primary px-4 py-2 rounded-sm border border-primary hover:bg-white hover:text-primary transition-colors text-sm font-medium cursor-pointer">
-            Clear All Filters
+            Limpiar Filtros
           </button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           <!-- Zone Filter -->
           <div>
-            <label class="block text-sm font-medium mb-2">Zone</label>
+            <label class="block text-sm font-medium mb-2">Zona</label>
             <select id="zone-filter" class="filter-select">
-              <option value="">All Zones</option>
+              <option value="">Todas las Zonas</option>
               {uniqueZones.map(zone => (
                 <option value={zone}>{zone}</option>
               ))}
@@ -78,53 +78,47 @@ const paginatedProperties = allProperties.slice(startIndex, endIndex);
 
           <!-- Price Range -->
           <div>
-            <label class="block text-sm font-medium mb-2">Min Price</label>
+            <label class="block text-sm font-medium mb-2">Precio Mín.</label>
             <select id="min-price-filter" class="filter-select">
-              <option value="">No Min</option>
-              <option value="500000">$500,000</option>
+              <option value="">Sin mínimo</option>
               <option value="1000000">$1,000,000</option>
               <option value="2000000">$2,000,000</option>
+              <option value="3000000">$3,000,000</option>
               <option value="5000000">$5,000,000</option>
             </select>
           </div>
 
           <div>
-            <label class="block text-sm font-medium mb-2">Max Price</label>
+            <label class="block text-sm font-medium mb-2">Precio Máx.</label>
             <select id="max-price-filter" class="filter-select">
-              <option value="">No Max</option>
-              <option value="1000000">$1,000,000</option>
+              <option value="">Sin máximo</option>
               <option value="2000000">$2,000,000</option>
-              <option value="5000000">$5,000,000</option>
+              <option value="4000000">$4,000,000</option>
+              <option value="6000000">$6,000,000</option>
               <option value="10000000">$10,000,000</option>
             </select>
           </div>
 
           <!-- Bedrooms -->
           <div>
-            <label class="block text-sm font-medium mb-2">Bedrooms</label>
+            <label class="block text-sm font-medium mb-2">Recámaras</label>
             <select id="bedrooms-filter" class="filter-select">
-              <option value="">Any</option>
-              <option value="1">1+ Bedroom</option>
-              <option value="2">2+ Bedrooms</option>
-              <option value="3">3+ Bedrooms</option>
-              <option value="4">4+ Bedrooms</option>
-              <option value="5">5+ Bedrooms</option>
-              <option value="6">6+ Bedrooms</option>
-              <option value="7">7+ Bedrooms</option>
-              <option value="8">8+ Bedrooms</option>
+              <option value="">Cualquiera</option>
+              <option value="1">1+ Recámara</option>
+              <option value="2">2+ Recámaras</option>
+              <option value="3">3+ Recámaras</option>
+              <option value="4">4+ Recámaras</option>
             </select>
           </div>
 
           <!-- Bathrooms -->
           <div>
-            <label class="block text-sm font-medium mb-2">Bathrooms</label>
+            <label class="block text-sm font-medium mb-2">Baños</label>
             <select id="bathrooms-filter" class="filter-select">
-              <option value="">Any</option>
-              <option value="1">1+ Bathroom</option>
-              <option value="2">2+ Bathrooms</option>
-              <option value="3">3+ Bathrooms</option>
-              <option value="4">4+ Bathrooms</option>
-              <option value="5">5+ Bathrooms</option>
+              <option value="">Cualquiera</option>
+              <option value="1">1+ Baño</option>
+              <option value="2">2+ Baños</option>
+              <option value="3">3+ Baños</option>
             </select>
           </div>
         </div>
@@ -133,18 +127,18 @@ const paginatedProperties = allProperties.slice(startIndex, endIndex);
       <!-- Sort and Results Count -->
       <div class="flex items-center justify-between">
         <div class="text-neutral-dark">
-          <span id="results-count" class="font-medium">Showing {allProperties.length} Properties</span>
+          <span id="results-count" class="font-medium">Mostrando {allProperties.length} Propiedades</span>
         </div>
 
         <div class="flex items-center space-x-3">
-          <span class="text-sm font-medium text-neutral-dark whitespace-nowrap">Sort by:</span>
+          <span class="text-sm font-medium text-neutral-dark whitespace-nowrap">Ordenar por:</span>
           <select id="sort-select" class="filter-select min-w-40">
-            <option value="featured">Featured</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-            <option value="newest">Newest First</option>
-            <option value="bedrooms">Most Bedrooms</option>
-            <option value="size">Largest Size</option>
+            <option value="featured">Destacadas</option>
+            <option value="price-low">Precio: Menor a Mayor</option>
+            <option value="price-high">Precio: Mayor a Menor</option>
+            <option value="newest">Más Recientes</option>
+            <option value="bedrooms">Más Recámaras</option>
+            <option value="size">Mayor Superficie</option>
           </select>
         </div>
       </div>
@@ -165,10 +159,10 @@ const paginatedProperties = allProperties.slice(startIndex, endIndex);
           <svg class="w-16 h-16 text-primary-pale mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
           </svg>
-          <h3 class="text-xl font-semibold text-primary-dark mb-2">No Properties Found</h3>
-          <p class="text-neutral-light mb-6">Try adjusting your filters or search criteria</p>
+          <h3 class="text-xl font-semibold text-primary mb-2">No se Encontraron Propiedades</h3>
+          <p class="text-neutral-light mb-6">Intenta ajustar tus filtros o criterios de búsqueda</p>
           <button class="bg-primary text-white px-6 py-3 rounded-sm hover:bg-primary-soft transition-colors font-medium">
-            Clear Filters
+            Limpiar Filtros
           </button>
         </div>
       )}
@@ -206,8 +200,8 @@ const paginatedProperties = allProperties.slice(startIndex, endIndex);
 
   <!-- CTA Section -->
   <CallToAction
-    title="Can't Find What You're Looking For?"
-    subtitle="Let our expert team help you find the perfect property. We have access to exclusive listings not shown here."
+    title="¿No Encontraste lo que Buscas?"
+    subtitle="Nuestro equipo tiene acceso a listados exclusivos que no aparecen aquí. Contáctanos y te ayudamos a encontrar la propiedad ideal."
   />
 </Layout>
 

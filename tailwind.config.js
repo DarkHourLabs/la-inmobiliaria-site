@@ -16,6 +16,13 @@ export default {
           800: 'var(--color-primary-800)',
           900: 'var(--color-primary-900)',
         },
+        accent: {
+          300: 'var(--color-accent-300)',
+          400: 'var(--color-accent-400)',
+          500: 'var(--color-accent-500)',
+          600: 'var(--color-accent-600)',
+          700: 'var(--color-accent-700)',
+        },
         neutral: {
           50: 'var(--color-neutral-50)',
           100: 'var(--color-neutral-100)',

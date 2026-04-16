@@ -7,7 +7,7 @@ const propertiesSchema = z.object({
   zone: z.string(),
   price: z.number(),
   originalPrice: z.number().optional(),
-  currency: z.string().default('USD'),
+  currency: z.string().default('MXN'),
   bedrooms: z.number(),
   bathrooms: z.number(),
   size: z.number(), // in square meters

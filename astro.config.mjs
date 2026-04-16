@@ -5,11 +5,18 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://housesboutique.com',
+  site: 'https://lainmobiliaria.mx',
   vite: {
     plugins: [tailwindcss()]
   },
   integrations: [
     sitemap()
-  ]
+  ],
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  }
 });

@@ -9,8 +9,9 @@ const zones = await getCollection('zones');
 const allProperties = await getCollection('properties');
 
 // Helper function to format price
-const formatPrice = (price: number, currency: string = 'USD') => {
-  return new Intl.NumberFormat('en-US', {
+const formatPrice = (price: number, currency: string = 'MXN') => {
+  const locale = currency === 'MXN' ? 'es-MX' : 'en-US';
+  return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency: currency,
     maximumFractionDigits: 0
@@ -26,8 +27,8 @@ const getZoneProperties = (zoneTitle: string, limit: number = 3) => {
 ---
 
 <Layout
-  title="Premium Zones - Houses Boutique"
-  description="Explore our exclusive collection of premium neighborhoods and zones. Find properties in the most sought-after locations."
+  title="Zonas Exclusivas — La Inmobiliaria"
+  description="Explora nuestra colección exclusiva de zonas y colonias en La Paz, BCS. Encuentra propiedades en las ubicaciones más deseadas."
 >
   <!-- Hero Section -->
   <section class="relative h-96 overflow-hidden">
@@ -35,10 +36,10 @@ const getZoneProperties = (zoneTitle: string, limit: number = 3) => {
     <div class="relative container mx-auto px-4 h-full flex items-center">
       <div class="max-w-2xl">
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-          Premium Zones
+          Zonas Exclusivas
         </h1>
         <p class="text-xl text-white/90">
-          Discover our curated selection of exclusive neighborhoods and prime locations
+          Descubre nuestra selección curada de colonias y zonas premium en La Paz, BCS
         </p>
       </div>
     </div>
@@ -48,7 +49,7 @@ const getZoneProperties = (zoneTitle: string, limit: number = 3) => {
   <section class="py-8 bg-white border-b border-primary-faint sticky top-16 z-40">
     <div class="container mx-auto px-4">
       <div class="flex flex-wrap items-center gap-4">
-        <span class="text-neutral-dark font-medium">Explore Zones:</span>
+        <span class="text-neutral-dark font-medium">Explorar Zonas:</span>
         <div class="flex flex-wrap gap-2">
           {zones.map((zone) => (
             <a
@@ -84,7 +85,7 @@ const getZoneProperties = (zoneTitle: string, limit: number = 3) => {
               <div class="space-y-4">
                 {zone.data.features && zone.data.features.length > 0 && (
                   <div>
-                    <h3 class="text-xl font-semibold text-primary-dark mb-3">Key Features</h3>
+                    <h3 class="text-xl font-semibold text-primary mb-3">Características</h3>
                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {zone.data.features.map((feature) => (
                         <li class="flex items-center space-x-3">
@@ -100,7 +101,7 @@ const getZoneProperties = (zoneTitle: string, limit: number = 3) => {
                   <div class="bg-primary-soft p-6 rounded-lg text-primary-lightest">
                     <div class="flex items-center justify-between">
                       <div>
-                        <p class="text-sm font-medium">Average Property Price</p>
+                        <p class="text-sm font-medium">Precio Promedio</p>
                         <p class="text-2xl font-bold">
                           {formatPrice(zone.data.averagePrice)}
                         </p>
@@ -121,7 +122,7 @@ const getZoneProperties = (zoneTitle: string, limit: number = 3) => {
                   href={`/zones/${zone.slug}`}
                   class="inline-flex items-center bg-primary-soft text-primary-lightest px-6 py-3 rounded-sm hover:bg-primary transition-colors font-medium"
                 >
-                  Explore {zone.data.title}
+                  Explorar {zone.data.title}
                   <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -141,7 +142,7 @@ const getZoneProperties = (zoneTitle: string, limit: number = 3) => {
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
                 class="w-full"
-                title={`Map of ${zone.data.title}`}
+                title={`Mapa de ${zone.data.title}`}
               ></iframe>
             </div>
           </div>
@@ -151,13 +152,13 @@ const getZoneProperties = (zoneTitle: string, limit: number = 3) => {
             <div class="border-t border-primary-faint pt-12">
               <div class="flex items-center justify-between mb-8">
                 <h3 class="text-2xl font-semibold text-primary-dark">
-                  Featured Properties in {zone.data.title}
+                  Propiedades en {zone.data.title}
                 </h3>
                 <a
                   href={`/zones/${zone.slug}`}
                   class="text-primary hover:text-primary-soft transition-colors font-medium flex items-center"
                 >
-                  View All Properties
+                  Ver Propiedades
                   <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -178,8 +179,8 @@ const getZoneProperties = (zoneTitle: string, limit: number = 3) => {
                 <svg class="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
                 </svg>
-                <p class="font-medium mb-2">Properties Coming Soon</p>
-                <p class="text-sm">Exclusive properties in {zone.data.title} will be available shortly.</p>
+                <p class="font-medium mb-2">Propiedades Próximamente</p>
+                <p class="text-sm">Las propiedades exclusivas en {zone.data.title} estarán disponibles en breve.</p>
               </div>
             </div>
           )}
@@ -190,8 +191,8 @@ const getZoneProperties = (zoneTitle: string, limit: number = 3) => {
 
   <!-- Call to Action -->
   <CallToAction
-    title="Find Your Perfect Location"
-    subtitle="Let our expert team help you discover the perfect property in these exclusive zones. Contact us to schedule a viewing or get more information."
+    title="Encuentra tu Ubicación Ideal"
+    subtitle="Nuestro equipo experto te ayudará a descubrir la propiedad perfecta en estas zonas exclusivas de La Paz, BCS."
   />
 </Layout>
 

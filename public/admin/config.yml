@@ -2,7 +2,7 @@ backend:
   name: github
   repo: DarkHourLabs/la-inmobiliaria-site
   branch: main
-  base_url: https://sveltia-cms-auth.pages.dev  # Free OAuth proxy - no Netlify needed
+  base_url: https://lainmobiliaria.mx  # Self-hosted OAuth via /api/auth + /api/callback
 
 # Media files stored in public/images
 media_folder: "public/images/uploads"

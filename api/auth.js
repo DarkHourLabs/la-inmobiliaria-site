@@ -1,28 +1,33 @@
 /**
  * GitHub OAuth proxy for Decap CMS
- * Handles the OAuth callback and token exchange with GitHub.
+ * Handles both the initial redirect and the OAuth callback/token exchange.
  *
  * Required env vars in Vercel dashboard:
  *   GITHUB_CLIENT_ID      — from your GitHub OAuth App
  *   GITHUB_CLIENT_SECRET  — from your GitHub OAuth App
  *
- * GitHub OAuth App setup:
- *   Homepage URL:          https://lainmobiliaria.mx
- *   Authorization callback URL: https://la-inmobiliaria-houses-boutique.vercel.app/api/auth
+ * GitHub OAuth App settings:
+ *   Homepage URL:                  https://lainmobiliaria.mx
+ *   Authorization callback URL:    https://lainmobiliaria.mx/api/auth
  */
 
 export default async function handler(req, res) {
-  const { code, provider } = req.query;
+  const { code, error, error_description } = req.query;
 
-  // Step 1: Redirect to GitHub for authorization
+  // Handle OAuth error from GitHub
+  if (error) {
+    return res.status(200).send(renderMessage('error', { message: error_description || error }));
+  }
+
+  // Step 1: No code yet — redirect to GitHub for authorization
   if (!code) {
     const clientId = process.env.GITHUB_CLIENT_ID;
     if (!clientId) {
       return res.status(500).send('GITHUB_CLIENT_ID not configured');
     }
-    const redirectUri = `${process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : 'https://la-inmobiliaria-houses-boutique.vercel.app'}/api/auth`;
+    const redirectUri = 'https://lainmobiliaria.mx/api/auth';
     const scope = 'repo,user';
-    const authUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}`;
+    const authUrl = `https://github.com/login/oauth/authorize?client_id=${encodeURIComponent(clientId)}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}`;
     return res.redirect(authUrl);
   }
 
@@ -31,7 +36,7 @@ export default async function handler(req, res) {
   const clientSecret = process.env.GITHUB_CLIENT_SECRET;
 
   if (!clientId || !clientSecret) {
-    return res.status(500).send('GitHub OAuth credentials not configured');
+    return res.status(200).send(renderMessage('error', { message: 'OAuth not configured on server' }));
   }
 
   try {
@@ -39,7 +44,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: 'application/json',
       },
       body: JSON.stringify({
         client_id: clientId,
@@ -51,31 +56,37 @@ export default async function handler(req, res) {
     const data = await tokenRes.json();
 
     if (data.error) {
-      return res.status(400).send(`OAuth error: ${data.error_description || data.error}`);
+      return res.status(200).send(renderMessage('error', { message: data.error_description || data.error }));
     }
 
-    const token = data.access_token;
-
-    // Step 3: Return token to Decap CMS via postMessage
-    const script = `
-      <script>
-        (function() {
-          function receiveMessage(e) {
-            console.log("receiveMessage %o", e);
-            window.opener.postMessage(
-              'authorization:github:success:${JSON.stringify({ token, provider: 'github' })}',
-              e.origin
-            );
-          }
-          window.addEventListener("message", receiveMessage, false);
-          window.opener.postMessage("authorizing:github", "*");
-        })();
-      </script>
-    `;
-
-    return res.status(200).send(`<!DOCTYPE html><html><head><title>Authorizing...</title></head><body>${script}</body></html>`);
+    return res.status(200).send(renderMessage('success', {
+      token: data.access_token,
+      provider: 'github',
+    }));
   } catch (err) {
     console.error('OAuth error:', err);
-    return res.status(500).send('OAuth token exchange failed');
+    return res.status(200).send(renderMessage('error', { message: 'Server error during token exchange' }));
   }
+}
+
+function renderMessage(status, data) {
+  const provider = 'github';
+  const message = `authorization:${provider}:${status}:${JSON.stringify(data)}`;
+  return `<!DOCTYPE html>
+<html>
+<head><title>Autenticando...</title></head>
+<body>
+<script>
+(function() {
+  var message = ${JSON.stringify(message)};
+  function receiveMessage(e) {
+    window.opener.postMessage(message, e.origin);
+  }
+  window.addEventListener('message', receiveMessage, false);
+  window.opener.postMessage('authorizing:${provider}', '*');
+})();
+</script>
+<p>${status === 'success' ? 'Autenticación exitosa. Cerrando...' : 'Error: ' + (data.message || '')}</p>
+</body>
+</html>`;
 }

@@ -2,7 +2,8 @@ backend:
   name: github
   repo: DarkHourLabs/la-inmobiliaria-site
   branch: main
-  base_url: https://lainmobiliaria.mx  # Self-hosted OAuth via /api/auth + /api/callback
+  base_url: https://lainmobiliaria.mx
+  auth_endpoint: api/auth
 
 # Media files stored in public/images
 media_folder: "public/images/uploads"

@@ -15,129 +15,129 @@ site_url: https://lainmobiliaria.mx
 collections:
   # ─── PROPERTIES ───────────────────────────────────────────────
   - name: "properties"
-    label: "Propiedades"
-    label_singular: "Propiedad"
+    label: "Properties"
+    label_singular: "Property"
     folder: "src/content/properties"
     create: true
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Zona", name: "zone", widget: "string", hint: "Slug de la zona (ej: centro, marina, centenario)" }
-      - { label: "Precio", name: "price", widget: "number" }
-      - { label: "Precio Original", name: "originalPrice", widget: "number", required: false }
-      - { label: "Moneda", name: "currency", widget: "select", options: ["MXN", "USD"], default: "MXN" }
-      - { label: "Recámaras", name: "bedrooms", widget: "number", value_type: "int" }
-      - { label: "Baños", name: "bathrooms", widget: "number", value_type: "int" }
-      - { label: "Tamaño (m²)", name: "size", widget: "number" }
-      - { label: "Unidad de tamaño", name: "sizeUnit", widget: "string", default: "m²", required: false }
-      - { label: "Descripción", name: "description", widget: "text" }
-      - { label: "Destacada", name: "featured", widget: "boolean", default: false }
-      - label: "Estado"
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Zone", name: "zone", widget: "string", hint: "Zone slug (e.g.: centro, marina, centenario)" }
+      - { label: "Price", name: "price", widget: "number" }
+      - { label: "Original Price", name: "originalPrice", widget: "number", required: false }
+      - { label: "Currency", name: "currency", widget: "select", options: ["MXN", "USD"], default: "MXN" }
+      - { label: "Bedrooms", name: "bedrooms", widget: "number", value_type: "int" }
+      - { label: "Bathrooms", name: "bathrooms", widget: "number", value_type: "int" }
+      - { label: "Size (m²)", name: "size", widget: "number" }
+      - { label: "Size Unit", name: "sizeUnit", widget: "string", default: "m²", required: false }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - label: "Status"
         name: "status"
         widget: "select"
         options:
-          - { label: "Disponible", value: "available" }
-          - { label: "En proceso", value: "pending" }
-          - { label: "Vendida", value: "sold" }
+          - { label: "Available", value: "available" }
+          - { label: "Pending", value: "pending" }
+          - { label: "Sold", value: "sold" }
         default: "available"
-      - { label: "Imagen principal", name: "image", widget: "image" }
-      - label: "Galería de imágenes"
+      - { label: "Main Image", name: "image", widget: "image" }
+      - label: "Image Gallery"
         name: "images"
         widget: "list"
         required: false
-        field: { label: "Imagen", name: "image", widget: "image" }
-      - label: "Ubicación"
+        field: { label: "Image", name: "image", widget: "image" }
+      - label: "Location"
         name: "location"
         widget: "object"
         fields:
-          - { label: "Dirección", name: "address", widget: "string" }
-          - label: "Coordenadas"
+          - { label: "Address", name: "address", widget: "string" }
+          - label: "Coordinates"
             name: "coordinates"
             widget: "object"
             required: false
             fields:
-              - { label: "Latitud", name: "lat", widget: "number", value_type: "float" }
-              - { label: "Longitud", name: "lng", widget: "number", value_type: "float" }
-      - label: "Amenidades"
+              - { label: "Latitude", name: "lat", widget: "number", value_type: "float" }
+              - { label: "Longitude", name: "lng", widget: "number", value_type: "float" }
+      - label: "Amenities"
         name: "amenities"
         widget: "list"
         required: false
-        field: { label: "Amenidad", name: "amenity", widget: "string" }
-      - label: "Instalaciones"
+        field: { label: "Amenity", name: "amenity", widget: "string" }
+      - label: "Facilities"
         name: "facilities"
         widget: "list"
         required: false
-        field: { label: "Instalación", name: "facility", widget: "string" }
-      - { label: "Año de construcción", name: "yearBuilt", widget: "number", value_type: "int", required: false }
-      - { label: "Estacionamientos", name: "parking", widget: "number", value_type: "int", required: false }
-      - { label: "ID del agente", name: "agent-id", widget: "string", required: false }
-      - { label: "Creado", name: "createdAt", widget: "datetime", required: false }
-      - { label: "Actualizado", name: "updatedAt", widget: "datetime", required: false }
-      - { label: "Contenido", name: "body", widget: "markdown", required: false }
+        field: { label: "Facility", name: "facility", widget: "string" }
+      - { label: "Year Built", name: "yearBuilt", widget: "number", value_type: "int", required: false }
+      - { label: "Parking", name: "parking", widget: "number", value_type: "int", required: false }
+      - { label: "Agent ID", name: "agent-id", widget: "string", required: false }
+      - { label: "Created At", name: "createdAt", widget: "datetime", required: false }
+      - { label: "Updated At", name: "updatedAt", widget: "datetime", required: false }
+      - { label: "Content", name: "body", widget: "markdown", required: false }
 
   # ─── AGENTS ───────────────────────────────────────────────────
   - name: "agents"
-    label: "Agentes"
-    label_singular: "Agente"
+    label: "Agents"
+    label_singular: "Agent"
     folder: "src/content/agents"
     create: true
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
     fields:
-      - { label: "ID del agente", name: "agent-id", widget: "string" }
-      - { label: "Título (slug)", name: "title", widget: "string", hint: "Identificador único, ej: ana-garcia" }
-      - { label: "Nombre completo", name: "name", widget: "string" }
-      - { label: "Puesto", name: "jobTitle", widget: "string" }
-      - { label: "Biografía", name: "bio", widget: "text" }
+      - { label: "Agent ID", name: "agent-id", widget: "string" }
+      - { label: "Title (slug)", name: "title", widget: "string", hint: "Unique identifier, e.g.: ana-garcia" }
+      - { label: "Full Name", name: "name", widget: "string" }
+      - { label: "Job Title", name: "jobTitle", widget: "string" }
+      - { label: "Bio", name: "bio", widget: "text" }
       - { label: "Email", name: "email", widget: "string" }
-      - { label: "Teléfono", name: "phone", widget: "string" }
-      - { label: "Foto", name: "image", widget: "image" }
-      - label: "Idiomas"
+      - { label: "Phone", name: "phone", widget: "string" }
+      - { label: "Photo", name: "image", widget: "image" }
+      - label: "Languages"
         name: "languages"
         widget: "list"
         required: false
-        field: { label: "Idioma", name: "language", widget: "string" }
-      - label: "Especialidades"
+        field: { label: "Language", name: "language", widget: "string" }
+      - label: "Specialties"
         name: "specialties"
         widget: "list"
         required: false
-        field: { label: "Especialidad", name: "specialty", widget: "string" }
-      - { label: "Experiencia", name: "experience", widget: "string", required: false }
+        field: { label: "Specialty", name: "specialty", widget: "string" }
+      - { label: "Experience", name: "experience", widget: "string", required: false }
 
   # ─── ZONES ────────────────────────────────────────────────────
   - name: "zones"
-    label: "Zonas"
-    label_singular: "Zona"
+    label: "Zones"
+    label_singular: "Zone"
     folder: "src/content/zones"
     create: true
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Descripción corta", name: "description", widget: "text" }
-      - { label: "Descripción larga", name: "overview", widget: "markdown" }
-      - { label: "Imagen principal", name: "image", widget: "image" }
-      - { label: "Miniatura", name: "thumbnail", widget: "image", required: false }
-      - { label: "URL de mapa embed", name: "mapEmbedUrl", widget: "string", required: false }
-      - label: "Coordenadas del mapa"
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Short Description", name: "description", widget: "text" }
+      - { label: "Long Description", name: "overview", widget: "markdown" }
+      - { label: "Main Image", name: "image", widget: "image" }
+      - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
+      - { label: "Map Embed URL", name: "mapEmbedUrl", widget: "string", required: false }
+      - label: "Map Coordinates"
         name: "coordinates"
         widget: "object"
         required: false
         fields:
-          - label: "Centro"
+          - label: "Center"
             name: "center"
             widget: "object"
             fields:
-              - { label: "Latitud", name: "lat", widget: "number", value_type: "float" }
-              - { label: "Longitud", name: "lng", widget: "number", value_type: "float" }
+              - { label: "Latitude", name: "lat", widget: "number", value_type: "float" }
+              - { label: "Longitude", name: "lng", widget: "number", value_type: "float" }
           - { label: "Zoom", name: "zoom", widget: "number", value_type: "int", default: 14 }
-      - label: "Características"
+      - label: "Features"
         name: "features"
         widget: "list"
         required: false
-        field: { label: "Característica", name: "feature", widget: "string" }
-      - { label: "Precio promedio", name: "averagePrice", widget: "number", required: false }
+        field: { label: "Feature", name: "feature", widget: "string" }
+      - { label: "Average Price", name: "averagePrice", widget: "number", required: false }

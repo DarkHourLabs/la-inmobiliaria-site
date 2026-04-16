@@ -17,7 +17,7 @@ images:
   - https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=entropy&auto=format
   - https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=600&fit=crop&crop=entropy&auto=format
   - https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop&crop=entropy&auto=format
-  - https://res.cloudinary.com/dqom6oy7t/image/upload/v1776360144/post-01-launch_lltr5y.png
+  - https://res.cloudinary.com/dqom6oy7t/image/upload/v1776357881/main-sample.png
 location:
   address: Fraccionamiento Villa Centenario, El Centenario, La Paz, BCS
   coordinates:

@@ -100,8 +100,6 @@
   <button id="btn-system" onclick="setTheme('system')">💻</button>
 </div>
 
-<!-- js-yaml for config parsing -->
-<script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
 <!-- Tell Decap CMS to wait for manual init -->
 <script>window.CMS_MANUAL_INIT = true;</script>
 <!-- Decap CMS -->
@@ -153,20 +151,12 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', fun
   if (getThemePref() === 'system') applyTheme('system');
 });
 
-// ── Manual CMS init with patched locale ───────────────────────────
-fetch('config.yml')
-  .then(function(r) { return r.text(); })
-  .then(function(yamlText) {
-    var config = jsyaml.load(yamlText);
-    config.locale = getLocale();
-    // Prevent Decap from also fetching config.yml internally (avoids duplicate collections)
-    config.load_config_file = false;
-    window.CMS.init({ config: config });
-  })
-  .catch(function(err) {
-    console.error('[CMS] Failed to load config.yml, falling back to default init', err);
-    window.CMS.init();
-  });
+// ── CMS init ──────────────────────────────────────────────────────
+// Let Decap load config.yml directly (no programmatic config injection).
+// Passing config programmatically caused Decap v3 to merge it with the
+// file load, producing duplicate collections. Manual init just controls
+// *when* init fires — config loading is left to Decap's own fetch.
+window.CMS.init();
 </script>
 
 </body>

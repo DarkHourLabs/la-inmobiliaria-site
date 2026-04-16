@@ -9,8 +9,8 @@ backend:
 media_library:
   name: cloudinary
   config:
-    cloud_name: CLOUDINARY_CLOUD_NAME   # <-- replace with actual cloud name
-    api_key: CLOUDINARY_API_KEY         # <-- replace with actual API key
+    cloud_name: dqom6oy7t
+    api_key: 833243661766811
     # API secret is server-side only; do not put it here
 
 # Fallback local folders (used only if Cloudinary widget is unavailable)
